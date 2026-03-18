@@ -1,0 +1,29 @@
+Retrieval-Augmented Generation (RAG) is a technique that combines neural network language models with document retrieval systems to ground generated text in factual content. It was introduced by Lewis et al. in 2020 and has become one of the most practical methods for reducing hallucinations in large language models.
+
+The core idea behind RAG is straightforward: instead of relying solely on knowledge encoded in model parameters during training, the model retrieves relevant passages from an external knowledge base at inference time. This retrieved context is then concatenated with the user query and passed to a sequence-to-sequence model to generate the final response.
+
+FAISS (Facebook AI Similarity Search) is an open-source library developed by Meta AI Research for efficient similarity search and clustering of dense vectors. It supports both CPU and GPU acceleration and can handle billions of vectors with sub-linear query time using approximate nearest neighbour algorithms such as HNSW and IVF. FAISS is widely used in production RAG systems for its speed and scalability.
+
+Sentence transformers are neural network models fine-tuned specifically for generating semantically meaningful sentence embeddings. Models like all-MiniLM-L6-v2 produce 384-dimensional embeddings that capture semantic similarity, making them ideal for document retrieval. They are built on the BERT architecture and trained using contrastive learning objectives such as multiple negative ranking loss.
+
+LangChain is a framework for developing applications powered by large language models. It provides abstractions for chains, agents, tools, memory, and retrievers, enabling developers to compose complex LLM pipelines with minimal boilerplate. LangChain's ReAct agent pattern allows models to reason about which tool to call next and act accordingly.
+
+LLaVA (Large Language and Vision Assistant) is a multimodal model that connects a vision encoder with a language model for visual instruction following. LLaVA-1.5 uses CLIP ViT-L as its vision backbone and Vicuna as the language model, achieving strong performance on visual question answering and image captioning benchmarks.
+
+Vector databases store high-dimensional embeddings and support fast approximate nearest neighbour search. Key operations include indexing (adding vectors), querying (finding the K most similar vectors), and persistence (saving and loading index state). Popular solutions include FAISS, Chroma, Pinecone, Weaviate, and Qdrant.
+
+Transformer models, introduced in the paper "Attention Is All You Need" (Vaswani et al., 2017), use self-attention mechanisms to process sequences in parallel. Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. Transformers form the basis of virtually all modern NLP and Vision-Language models.
+
+Prompt engineering is the practice of crafting effective input prompts to guide language model behaviour. Techniques include zero-shot prompting, few-shot exemplars, chain-of-thought reasoning, role-playing system prompts, and retrieval-augmented prompts. Effective prompting can dramatically improve model performance without any fine-tuning.
+
+Knowledge distillation transfers knowledge from a large teacher model to a smaller student model, enabling deployment of high-performance models on resource-constrained devices. The student is trained to minimise the KL divergence between its output distribution and the teacher's soft logit distribution. Distilled models are widely used in edge AI applications.
+
+Mixture of Experts (MoE) architectures use a gating network to route each input token to a subset of specialised expert networks. This enables massive model capacity while keeping computation per token manageable. Models like Mixtral 8x7B demonstrate that MoE can match dense model performance at a fraction of the inference cost.
+
+Reinforcement Learning from Human Feedback (RLHF) aligns language models with human preferences by training a reward model on human comparison data and using it to fine-tune the policy model with PPO. This technique was central to the development of InstructGPT, ChatGPT, and Claude, enabling models to be more helpful, harmless, and honest.
+
+Semantic chunking is the process of splitting documents into coherent text segments for embedding. Unlike naive character or token splitting, semantic chunking uses sentence boundary detection and sliding-window overlap to preserve contextual integrity. Proper chunking significantly impacts RAG retrieval quality.
+
+Quantisation reduces model inference cost by representing weights and activations in lower-precision formats such as INT8 or INT4. Techniques include post-training quantisation (PTQ) and quantisation-aware training (QAT). With GPTQ and AWQ quantisation, 7B parameter models can run on consumer hardware with minimal quality loss.
+
+Contrastive learning trains representations by pulling together embeddings of semantically similar pairs and pushing apart dissimilar pairs. SimCLR, MoCo, and CLIP use contrastive objectives to learn powerful vision and language representations without labeled data, enabling strong transfer to downstream tasks.

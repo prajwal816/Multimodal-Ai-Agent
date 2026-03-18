@@ -213,7 +213,7 @@ class FAISSMemory:
         while added < n:
             batch_n = min(batch_size, n - added)
             texts = [
-                templates[i % len(templates)].format(topics[i % len(topics)])
+                templates[i % len(templates)].format(topic=topics[i % len(topics)])
                 + f" [entry {added + i}]"
                 for i in range(batch_n)
             ]

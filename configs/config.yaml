@@ -1,0 +1,79 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Multimodal AI Agent — Master Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── LLM Backend ───────────────────────────────────────────────────────────────
+llm:
+  # backend: "openai" | "huggingface" | "stub"
+  backend: "stub"
+
+  openai:
+    model: "gpt-4o"
+    temperature: 0.2
+    max_tokens: 1024
+    api_key_env: "OPENAI_API_KEY"      # reads from env var
+
+  huggingface:
+    model_id: "mistralai/Mistral-7B-Instruct-v0.2"
+    device: "cpu"                       # "cuda" for GPU
+    max_new_tokens: 512
+    temperature: 0.3
+
+  stub:
+    response_prefix: "[STUB LLM]"
+
+# ── Vision Model ──────────────────────────────────────────────────────────────
+vision:
+  # backend: "llava" | "stub"
+  backend: "stub"
+
+  llava:
+    model_id: "llava-hf/llava-1.5-7b-hf"
+    device: "cpu"
+    max_new_tokens: 256
+
+  stub:
+    description_template: >
+      This image appears to contain visual content with notable features
+      including distinct shapes, colours, and structures relevant to the query.
+
+# ── Embeddings ────────────────────────────────────────────────────────────────
+embeddings:
+  model: "all-MiniLM-L6-v2"
+  # backend: "sentence_transformers" | "stub"
+  backend: "sentence_transformers"
+  dimension: 384                        # must match model output dim
+
+# ── FAISS Memory ──────────────────────────────────────────────────────────────
+memory:
+  index_path: "vector_store/faiss.index"
+  metadata_path: "vector_store/metadata.pkl"
+  top_k: 5
+  nlist: 100                            # IVF nlist for large-scale index
+
+# ── RAG Pipeline ──────────────────────────────────────────────────────────────
+rag:
+  top_k: 5
+  chunk_size: 512
+  chunk_overlap: 64
+  corpus_path: "data/sample_documents.txt"
+
+# ── Agent ─────────────────────────────────────────────────────────────────────
+agent:
+  max_iterations: 10
+  verbose: true
+  enable_search_tool: true
+  enable_memory_tool: true
+  enable_vision_tool: true
+
+# ── Logging ───────────────────────────────────────────────────────────────────
+logging:
+  level: "INFO"                         # DEBUG | INFO | WARNING | ERROR
+  log_file: "logs/agent.log"
+  rich_console: true
+
+# ── Metrics ───────────────────────────────────────────────────────────────────
+metrics:
+  output_path: "logs/metrics.json"
+  track_latency: true
+  track_retrieval: true
